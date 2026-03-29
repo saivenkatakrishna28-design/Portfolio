@@ -128,11 +128,11 @@ function toggleChat() {
 
     if (!chatInitialized) {
       addMessage(
-        "Hi! I am the NSVK portfolio assistant. You can ask me about Krishna's skills, education, projects, certifications, achievements, or contact details.",
+        "Hi! I am the NSVK portfolio assistant. You can ask me literally anything about Krishna using simple keywords.",
         "bot-msg"
       );
       addMessage(
-        "Try asking:\n• What are your skills?\n• Tell me about Sai Bot.\n• How can I contact Krishna?\n• Does the contact form work?",
+        "Try words like:\n• 'skills'\n• 'btech'\n• '10th' or '12th'\n• 'awards'\n• 'hire'\n• 'resume'",
         "bot-msg"
       );
       chatInitialized = true;
@@ -151,178 +151,78 @@ function addMessage(text, className) {
   body.scrollTop = body.scrollHeight;
 }
 
-function includesAny(input, keywords) {
-  return keywords.some((word) => input.includes(word));
-}
-
+// THE NEW, ULTRA-POWERFUL CHATBOT BRAIN
 function getBotResponse(input) {
-  input = input.toLowerCase().trim();
+  const text = input.toLowerCase().trim();
+  
+  // Helper functions to scan user text for keywords
+  const has = (keywords) => keywords.some(k => text.includes(k));
+  const hasAll = (keywords) => keywords.every(k => text.includes(k));
 
-  // Greetings
-  if (includesAny(input, ["hi", "hello", "hey", "hii"])) {
-    return "Hello! Ask me about Krishna's education, skills, projects, certifications, achievements, resume, or contact details.";
-  }
-
-  // About / General
-  if (includesAny(input, ["who are you", "who is nune sai venkata krishna", "who is krishna", "tell me about yourself", "about you"])) {
-    return "Nune Sai Venkata Krishna is a B.Tech student specializing in Computer Science Engineering with Artificial Intelligence and Machine Learning. He is an aspiring AI/ML Engineer with strong interest in programming, web development, machine learning, and generative AI.";
-  }
-  if (includesAny(input, ["what do you do", "professional background", "background"])) {
-    return "He is currently a B.Tech CSE (AI & ML) student and is building his technical background through programming, certifications, projects, prompt engineering, and practical learning in AI and software development.";
-  }
-  if (includesAny(input, ["career goals", "goal", "future goal", "what is your goal"])) {
-    return "His career goal is to become a skilled AI and Machine Learning Engineer and build meaningful solutions using intelligent technologies, software development, and real-world problem-solving.";
-  }
-  if (includesAny(input, ["what kind of roles", "roles are you looking for", "looking for right now", "job role"])) {
-    return "He is currently looking for learning opportunities, internships, project collaborations, and roles related to AI, Machine Learning, software development, and technology.";
-  }
-  if (includesAny(input, ["internship", "freelance", "open to internships", "open to freelance", "available for internship", "hire"])) {
-    return "Yes, he is open to internships, project collaborations, and learning opportunities in AI, Machine Learning, and software development. You can reach out via the contact form or email saivenkatakrishna28@gmail.com.";
-  }
-  if (includesAny(input, ["where are you located", "where are you from", "location", "from where", "located"])) {
-    return "He is from Chirala, Andhra Pradesh, India.";
-  }
-  if (includesAny(input, ["core strengths", "soft skills", "strengths"])) {
-    return "His core strengths include communication, discipline, consistency, problem-solving, curiosity, confidence, public speaking, and continuous learning.";
+  // 1. GREETINGS
+  if (has(["hi", "hello", "hey", "hii", "greetings", "morning", "evening", "sup", "what's up"])) {
+    return "Hello! Ask me literally anything: education, skills, projects, certificates, awards, or contact info!";
   }
 
-  // Education
-  if (includesAny(input, ["where are you currently studying", "currently studying", "where do you study", "current college"])) {
-    return "He is currently studying at Parul University (PIET), Gujarat.";
-  }
-  if (includesAny(input, ["major", "specialization", "branch", "what is your major"])) {
-    return "His major is Computer Science Engineering with a specialization in Artificial Intelligence and Machine Learning.";
-  }
-  if (includesAny(input, ["graduate", "expected to graduate", "graduation year", "when will you graduate", "passing out"])) {
-    return "He is expected to graduate in June 2029.";
-  }
-  if (includesAny(input, ["cgpa", "current cgpa", "gpa"])) {
-    return "His current CGPA is 6.70.";
-  }
-  if (includesAny(input, ["high school education", "where completed 10th", "till 10th", "10th class", "secondary school", "school till 10th"])) {
-    return "He completed his 10th class at Sundeep English Medium High School in Andhra Pradesh. Before that, he studied at Adithya Public School, Chirala.";
-  }
-  if (includesAny(input, ["12th", "12th grade", "11th", "high school score", "scores in 10th and 12th", "marks in 10th", "marks in 12th"])) {
-    return "He scored 91.5% in 10th grade, 74.17% in 11th grade, and 72.67% in 12th grade.";
-  }
-  if (includesAny(input, ["andhra pradesh", "did you study in andhra pradesh"])) {
-    return "Yes. He completed his schooling in Andhra Pradesh before joining Parul University in Gujarat.";
-  }
+  // 2. CONTACT & LINKS
+  if (has(["email", "mail id", "gmail"])) return "His email is saivenkatakrishna28@gmail.com.";
+  if (has(["phone", "mobile", "number", "call", "whatsapp", "contact number"])) return "His phone numbers are 8328279164 and 9505690670.";
+  if (has(["linkedin", "linked in"])) return "LinkedIn: https://in.linkedin.com/in/n-s-v-k";
+  if (has(["github", "git hub", "git"])) return "GitHub: https://github.com/saivenkatakrishna28-design";
+  if (has(["resume", "cv", "document", "download"])) return "You can view his resume by clicking the 'View Resume' button at the top of the page.";
 
-  // Skills
-  if (includesAny(input, ["programming languages", "languages do you know", "technical skills", "skills"])) {
-    return "He knows C, C++, Python, C#, HTML, CSS, JavaScript, Machine Learning fundamentals, Prompt Engineering, and Generative AI basics.";
-  }
-  if (includesAny(input, ["python"])) {
-    return "Yes, he knows Python and uses it for scripting, problem-solving, and machine learning-related learning tasks.";
-  }
-  if (includesAny(input, ["c++", "cpp"])) {
-    return "Yes, he knows C++ and has a strong foundation in programming concepts and logic building.";
-  }
-  if (includesAny(input, ["c language", "do you know c", " c "])) {
-    return "Yes, he knows C and has built projects like a Calculator in C.";
-  }
-  if (includesAny(input, ["c#"])) {
-    return "Yes, he is familiar with C# and structured software development concepts.";
-  }
-  if (includesAny(input, ["artificial intelligence", "machine learning", "ai ml", "skilled in ai", "skilled in machine learning"])) {
-    return "Yes, he has skills and certifications in Artificial Intelligence, Machine Learning, and Generative AI fundamentals.";
-  }
-  if (includesAny(input, ["web development technologies", "web development", "html css javascript", "frontend"])) {
-    return "He knows HTML, CSS, and JavaScript for building responsive and interactive web interfaces.";
-  }
-  if (includesAny(input, ["prompt engineering", "generative ai", "gen ai"])) {
-    return "Yes, he has experience with Prompt Engineering and Generative AI, supported by certifications and hands-on practice.";
-  }
+  // 3. SPECIFIC SKILLS
+  if (has(["python"])) return "He uses Python heavily for data manipulation, scripting, and Machine Learning models.";
+  if (has(["c++", "cpp"])) return "He knows C++ and has a strong foundation in Object-Oriented Programming (OOP) and memory management.";
+  if (hasAll(["c", "language"]) || text === "c" || text.includes(" c ") || text.startsWith("c ")) return "He is proficient in C programming and even built a command-line Calculator with it.";
+  if (has(["c#", "c sharp"])) return "He knows C# for building structured software applications using .NET frameworks.";
+  if (has(["html", "css", "javascript", "js", "web", "frontend", "front end"])) return "He is skilled in HTML, CSS, and JS. He designed and built this entire portfolio website himself!";
+  if (has(["machine learning", "ml", "ai", "artificial intelligence"])) return "He specializes in AI/ML, building predictive models, data processing, and foundational algorithms.";
+  if (has(["generative ai", "gen ai", "prompt", "chatgpt", "llm"])) return "He is skilled in Prompt Engineering and Generative AI, utilizing tools like Google Gen AI Studio and LLMs.";
 
-  // Projects
-  if (includesAny(input, ["what projects have you worked on", "projects", "project work"])) {
-    return "His main projects include the Portfolio Website, Sai Bot, and a Calculator in C.";
-  }
-  if (includesAny(input, ["sai bot", "tell me about sai bot"])) {
-    return "Sai Bot is a custom bot project that reflects his practical interest in AI, logic building, and project development. It showcases experimentation, strategy, and programming skills.";
-  }
-  if (includesAny(input, ["calculator project", "c calculator", "what is the c calculator project"])) {
-    return "The C Calculator project is a command-line application built in C to demonstrate logic building, control structures, and core programming fundamentals.";
-  }
-  if (includesAny(input, ["how did you build this portfolio website", "portfolio website", "built this website"])) {
-    return "This portfolio website was built using HTML, CSS, and JavaScript. It includes sections for education, skills, projects, certifications, achievements, contact details, and a custom chatbot assistant.";
-  }
-  if (includesAny(input, ["source code", "github source", "find the source code", "where can i find the source code"])) {
-    return "You can find the source code for his projects in the Projects section and on his GitHub profile: github.com/saivenkatakrishna28-design";
-  }
+  // 4. SPECIFIC PROJECTS
+  if (has(["sai bot"])) return "Sai Bot is a custom bot project he built to showcase practical AI/ML capabilities and integration.";
+  if (has(["calculator"])) return "He built a Calculator in C to demonstrate core logic, control structures, and syntax fundamentals.";
+  if (has(["portfolio website", "this website", "this site"])) return "He built this interactive portfolio using HTML, CSS, and JS, featuring responsive design and this very chatbot!";
 
-  // Certifications
-  if (includesAny(input, ["technical certifications", "certifications", "do you have any certifications"])) {
-    return "Yes. He has certifications in Machine Learning, AI, Generative AI, Prompt Engineering, AI for Beginners, SEO, and AI tools workshops.";
-  }
-  if (includesAny(input, ["google or microsoft", "certifications from google", "certifications from microsoft"])) {
-    return "Yes. He has completed certifications from Google Cloud and Microsoft, including Generative AI & Studio and Prompt Engineering.";
-  }
-  if (includesAny(input, ["where did you learn machine learning", "learn machine learning", "machine learning certification"])) {
-    return "He learned Machine Learning through certifications and training from freeCodeCamp, Simplilearn, and Udemy.";
-  }
-  if (includesAny(input, ["certifications in generative ai", "generative ai certifications"])) {
-    return "Yes. He has certifications and learning exposure in Generative AI through Google Cloud and other AI-focused programs.";
-  }
-  if (includesAny(input, ["seo masterclass", "ai-powered seo masterclass"])) {
-    return "The AI-Powered SEO Masterclass was a 3-day intensive learning program focused on SEO and AI-powered digital strategies.";
-  }
+  // 5. SPECIFIC ACHIEVEMENTS
+  if (has(["governor", "tamil nadu", "oratorical"])) return "He won the prestigious 2023 Governor's Award (3rd prize) in a Telugu Oratorical Competition, presented by the Governor of Tamil Nadu.";
+  if (has(["unicef", "sidp", "upshift"])) return "He submitted a social innovation project idea to the UNICEF SIDP after completing the UPSHIFT Design Process.";
+  if (has(["science", "rainbow", "exhibition"])) return "For the National Science Day exhibition in 10th grade, he created an artificial rainbow using a prism to disperse white light into VIBGYOR colors.";
+  if (has(["topper", "best student", "excellence", "rank"])) return "He was awarded 'Best Student' (2024-25) at SKPD, secured 1st overall in Class XI, and was the subject topper in English, Telugu, and Biology in Class XII.";
 
-  // Achievements
-  if (includesAny(input, ["biggest achievements", "achievements", "awards"])) {
-    return "His major achievements include the 2023 Governor's Award in a Telugu oratorical competition, academic excellence awards, UNICEF SIDP participation, literary and cultural competition wins, Praxis 2.0 participation, and the National Science Day exhibition.";
-  }
-  if (includesAny(input, ["governor's award", "governor award", "tell me about the governor"])) {
-    return "He received the Governor's Award in 2023 after winning 3rd prize in a Telugu Oratorical Competition conducted on the occasion of Sardar Vallabhbhai Patel's birth anniversary. The award was presented by the Governor of Tamil Nadu.";
-  }
-  if (includesAny(input, ["unicef sidp", "sidp project", "unicef project"])) {
-    return "The UNICEF SIDP Project involved completing the UPSHIFT Design Process for Social Innovation and submitting a project idea under the School Innovation and Development Project.";
-  }
-  if (includesAny(input, ["school topper", "academic excellence", "academic excellence awards", "best student"])) {
-    return "Yes. He received academic excellence recognition, including Best Student award, 1st Position overall in Class XI, and subject topper recognition in English, Telugu, and Biology.";
-  }
-  if (includesAny(input, ["tech events", "hackathon", "praxis", "tech expo"])) {
-    return "Yes. He participated in tech and innovation events including Google Dev Groups Praxis 2.0, Tech Expo 2026, Yuva AI for All, and other community and technology programs.";
-  }
-  if (includesAny(input, ["national science day", "science exhibition", "what did you build"])) {
-    return "For the National Science Day Exhibition, he created an artificial rainbow using a prism by passing white light through it and dispersing it into VIBGYOR colors.";
-  }
+  // 6. SPECIFIC EDUCATION
+  if (has(["10th", "tenth", "sundeep", "ssc", "matriculation"])) return "He scored 91.5% in his 10th standard from Sundeep English Medium High School.";
+  if (has(["11th", "eleventh", "12th", "twelfth", "inter", "skpd", "high school"])) return "He studied at SKPD Boys Higher Secondary School, scoring 74.17% in 11th and 72.67% in 12th.";
+  if (has(["btech", "b.tech", "college", "university", "parul", "piet", "degree", "currently studying", "study", "graduate"])) return "He is pursuing his B.Tech in CSE (AI & ML) at Parul University (Gujarat), expected to graduate in June 2029. His CGPA is 6.70.";
+  if (has(["cgpa", "gpa", "grade", "marks"])) return "His current B.Tech CGPA is 6.70. His 10th score was 91.5% and 12th was 72.67%.";
+  
+  // 7. SPECIFIC CERTIFICATIONS
+  if (has(["google"])) return "He has a 'Generative AI & Studio' certification from Google Cloud.";
+  if (has(["microsoft"])) return "He holds a 'Prompt Engineering' certification from Microsoft.";
+  if (has(["seo"])) return "He completed an intensive 3-day 'AI-Powered SEO Masterclass' program.";
+  
+  // 8. BROAD CATEGORIES (Catch-alls for single words)
+  if (has(["skill", "tech stack", "technologies", "know"])) return "His skills include C, C++, Python, C#, HTML, CSS, JavaScript, Machine Learning, and Generative AI.";
+  if (has(["project", "build", "developed"])) return "His key projects are this Portfolio Website, a C Calculator, and 'Sai Bot'. Ask me about any of them!";
+  if (has(["achievement", "award", "prize", "won"])) return "His top awards include the Governor's Award, 'Best Student' academic excellence, UNICEF SIDP participation, and a National Science Day exhibition project.";
+  if (has(["certificate", "certification", "certified", "course"])) return "He has 10+ certifications from Google, Microsoft, freeCodeCamp, Udemy, and others in AI, ML, Python, and Prompt Engineering.";
+  if (has(["education", "school"])) return "He did his schooling in AP (Sundeep High School & SKPD Boys) and is now doing his B.Tech at Parul University, Gujarat.";
+  
+  // 9. IDENTITY / GOALS / GENERAL
+  if (has(["goal", "future", "aim", "vision", "career"])) return "His career goal is to become a skilled AI and Machine Learning Engineer, building innovative software and intelligent systems.";
+  if (has(["internship", "freelance", "job", "hire", "work", "role"])) return "He is actively looking for internships, project collaborations, and learning opportunities in AI, ML, and software development.";
+  if (has(["location", "where", "city", "state", "live", "from", "chirala"])) return "He is located in Chirala, Andhra Pradesh, India.";
+  if (has(["strength", "soft skill", "quality"])) return "His non-technical strengths include communication, public speaking, discipline, and dedication.";
+  if (has(["who are you", "who is", "about", "yourself", "profile"])) return "Nune Sai Venkata Krishna (NSVK) is a B.Tech student specializing in AI & ML. He is passionate about programming, AI, and building real-world solutions.";
+  
+  // 10. FORM SPECIFICS
+  if (has(["form", "message", "contact form", "working", "does it work"])) return "Yes! You can fill out the contact form at the bottom of the page, and the message will be sent instantly to his email.";
+  if (has(["reply", "time", "how long"])) return "Krishna usually replies within 24 to 48 hours. If it's urgent, you can call him!";
+  if (has(["contact", "reach"])) return "You can email saivenkatakrishna28@gmail.com, call 8328279164, or use the contact form below.";
 
-  // Contact & Form Specifics
-  if (includesAny(input, ["how can i contact", "contact krishna", "contact", "reach out"])) {
-    return "You can use the contact form at the bottom of the page, or email him directly at saivenkatakrishna28@gmail.com. His phone numbers are 8328279164 / 9505690670.";
-  }
-  if (includesAny(input, ["where is the form", "contact form", "find the form"])) {
-    return "You can find the contact form by scrolling to the very bottom of the page in the 'Contact' section!";
-  }
-  if (includesAny(input, ["does the form work", "form working", "is the form active", "send a message"])) {
-    return "Yes! The contact form works perfectly. Just fill out your name, email, and message, and it will be sent directly to Krishna's inbox.";
-  }
-  if (includesAny(input, ["alternative", "easier way to contact", "bypass the form", "instead of form"])) {
-    return "If you prefer not to use the form, you can simply email saivenkatakrishna28@gmail.com or connect via LinkedIn!";
-  }
-  if (includesAny(input, ["how long to reply", "reply time", "response time"])) {
-    return "Krishna typically replies to emails and contact form messages within 24 to 48 hours.";
-  }
-  if (includesAny(input, ["email", "email address"])) {
-    return "His email address is saivenkatakrishna28@gmail.com.";
-  }
-  if (includesAny(input, ["phone", "phone number", "mobile number", "number"])) {
-    return "His phone numbers are 8328279164 and 9505690670.";
-  }
-  if (includesAny(input, ["linkedin", "linkedin profile"])) {
-    return "His LinkedIn profile is: https://in.linkedin.com/in/n-s-v-k";
-  }
-  if (includesAny(input, ["github", "github username", "github link"])) {
-    return "His GitHub profile is: https://github.com/saivenkatakrishna28-design";
-  }
-  if (includesAny(input, ["resume", "download resume", "view resume"])) {
-    return "You can view or download his resume using the 'View Resume' button on the home section of this portfolio.";
-  }
-
-  // Fallback
-  return "I'm still learning! You can reach out to Krishna directly at saivenkatakrishna28@gmail.com for more details.";
+  // 11. DEFAULT FALLBACK
+  return "I might not know the exact answer to that! Try using simple words like 'skills', 'projects', 'education', 'certificates', or 'contact'. You can also email him directly at saivenkatakrishna28@gmail.com.";
 }
 
 function sendMessage() {
@@ -334,6 +234,10 @@ function sendMessage() {
 
   addMessage(msg, "user-msg");
   input.value = "";
+
+  // Scroll to bottom immediately after user sends message
+  const body = document.getElementById("chatBody");
+  body.scrollTop = body.scrollHeight;
 
   setTimeout(() => {
     const reply = getBotResponse(msg);
@@ -347,18 +251,17 @@ function handleKeyPress(event) {
   }
 }
 
-// --- NEW CODE: SEAMLESS FORM SUBMISSION (AJAX) ---
+// SEAMLESS FORM SUBMISSION LOGIC
 const contactForm = document.getElementById("contactForm");
 
 if (contactForm) {
   contactForm.addEventListener("submit", async function (event) {
-    event.preventDefault(); // Prevents the default page redirect
+    event.preventDefault(); 
 
     const data = new FormData(contactForm);
     const submitButton = contactForm.querySelector("button[type='submit']");
     const originalText = submitButton.textContent;
 
-    // Change button text to show it's sending
     submitButton.textContent = "Sending...";
     submitButton.disabled = true;
 
@@ -372,10 +275,9 @@ if (contactForm) {
       });
 
       if (response.ok) {
-        // Success! Clear the form and notify the user
         contactForm.reset();
         submitButton.textContent = "Message Sent Successfully!";
-        submitButton.style.backgroundColor = "#4CAF50"; // Green color
+        submitButton.style.backgroundColor = "#4CAF50"; 
         submitButton.style.color = "white";
       } else {
         submitButton.textContent = "Oops! Error sending.";
@@ -384,12 +286,11 @@ if (contactForm) {
       submitButton.textContent = "Network Error.";
     }
 
-    // Reset button after 3 seconds
     setTimeout(() => {
       submitButton.textContent = originalText;
       submitButton.disabled = false;
-      submitButton.style.backgroundColor = ""; // Resets to CSS default
-      submitButton.style.color = ""; // Resets to CSS default
+      submitButton.style.backgroundColor = ""; 
+      submitButton.style.color = ""; 
     }, 3000);
   });
 }
